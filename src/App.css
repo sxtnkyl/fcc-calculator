@@ -1,0 +1,17 @@
+body {
+  background: blue;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 50vw;
+}
+
+#displayscreen {
+  background: green;
+}
+
+#inputkeys {
+  background: red;
+}
