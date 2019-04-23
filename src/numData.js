@@ -9,13 +9,16 @@ const numData = [
   { id: "8", keycode: [104, 56], value: 8 },
   { id: "9", keycode: [105, 57], value: 9 },
   { id: "0", keycode: [96, 48], value: 0 },
-  { id: "clear last", keycode: [8], value: "backspace" },
-  { id: "clear", keycode: [46], value: "delete" },
   { id: ".", keycode: [110, 190], value: "decimal" },
   { id: "+", keycode: [107], value: "operand" },
   { id: "-", keycode: [109], value: "operand" },
+  { id: "*", keycode: [106], value: "operand" },
   { id: "/", keycode: [111], value: "operand" },
-  { id: "=", keycode: [13], value: "operand" }
+  { id: "±", keycode: [220], value: "plusminus" },
+  { id: "=", keycode: [13], value: "equal" },
+  { id: "undo last", keycode: [16], value: "rightshift" },
+  { id: "clear last", keycode: [8], value: "backspace" },
+  { id: "clear", keycode: [46], value: "delete" }
 ];
 
 export default numData;
