@@ -37,7 +37,6 @@ class App extends Component {
 
   handleKeyPress = e => {
     e.preventDefault();
-    console.log("keypress called", e.keyCode);
     //take e.keyCode, match to num.keycode
     const nums = this.props.numData;
     const isKey = nums.find(obj => {
@@ -63,7 +62,7 @@ class App extends Component {
     }, 3500);
   };
 
-  //gets obj from Button/keypress of which numkey we are using, to determine action
+  //gets obj from click/keypress of which numkey we are using, to determine action
   fetchId = fetchedKey => {
     const storedValue = [...this.state.storedValue];
     const activeDisplay = [...this.state.activeDisplay];
@@ -116,20 +115,40 @@ class App extends Component {
     }
     ////////////////////////////////////////////////if plusminus, stored as key 220 or backslash
     if (fetchedKey.value === "plusminus") {
-      //takes first index, makes inverse
+      //removes first index, makes inverse
       //takes the inverted first index and adds it back to display
       //set activedisplay or storedvalue as new variable
       //if storedvalue has num and display is blank, plusminus the storedvalue
+
+      //only storedValue has data
       if (storedValue.length && !activeDisplay.length) {
         const firstStoredElement = -1 * storedValue.shift();
         storedValue.unshift(firstStoredElement);
         const inverseStored = [...storedValue];
         this.setState({ storedValue: inverseStored });
-      } else {
-        const firstElement = -1 * activeDisplay.shift();
-        activeDisplay.unshift(firstElement);
-        const inverseDisplay = [...activeDisplay];
-        this.setState({ activeDisplay: inverseDisplay });
+      }
+
+      //activeDisplay has data
+      else {
+        console.log(activeDisplay[0]);
+        //if starts with a decimal
+        if (activeDisplay[0] === ".") {
+          activeDisplay.unshift("-");
+          console.log(activeDisplay);
+          this.setState({ activeDisplay: activeDisplay });
+        }
+        //if starts with a negative
+        else if (activeDisplay[0] === "-") {
+          const y = activeDisplay.slice(1);
+          this.setState({ activeDisplay: y });
+        }
+        //if starts with a num
+        else {
+          const firstElement = -1 * activeDisplay.shift();
+          activeDisplay.unshift(firstElement);
+          const inverseDisplay = [...activeDisplay];
+          this.setState({ activeDisplay: inverseDisplay });
+        }
       }
     }
     //if decimal
@@ -143,15 +162,20 @@ class App extends Component {
     //////////////////////////////////////////////////if equals
     if (fetchedKey.value === "equal") {
       //if last input in storedvalue was num and not operand
+      const lastInput = [...storedValue];
+      const equationArr = lastInput.concat(activeDisplay);
       if (
         typeof storedValue[storedValue.length - 1] === "string" &&
         (typeof activeDisplay[activeDisplay.length - 1] === "number" || ".")
       ) {
-        this.setState({
-          storedValue: storedValue.concat(activeDisplay),
-          activeDisplay: []
-        });
-        this.computeValue();
+        // this.setState({
+        //   storedValue: equationArr,
+        //   activeDisplay: []
+        // });
+        // !!!computeValue was not getting "storedValue: equationArr" onClick, but did on keyPress
+        // still dont know why, ended up passing the equationArr as arg for func to ensure it recieved updated state array
+        // console.log(equationArr);
+        this.computeValue(equationArr);
       } else {
         this.setState({
           activeDisplay: [],
@@ -169,16 +193,19 @@ class App extends Component {
     }
   };
 
-  //computes the answer, updates activeDisplay to answer, sets storedValue to answer
+  //receives inputs in an array, computes the answer, sets storedValue to answer
   //https://stackoverflow.com/questions/33476637/what-are-the-variable-types-for-different-colors-in-chrome-developer-console
-  computeValue = () => {
-    //console.log("compvalue called", "storedvalue is:", this.state.storedValue);
-    const storedValue = [...this.state.storedValue];
-    const equation = storedValue.join("");
-    const answer = eval(equation);
+  computeValue = equationArr => {
+    //console.log("compvalue called", equationArr);
+    const stringedEquation = equationArr.join("");
+    //console.log(stringedEquation);
+    const answer = eval(stringedEquation);
+    //console.log(answer);
     //error: remove operand if last index in stored
-    this.setState({ storedValue: [answer], activeDisplay: [] });
-    console.log(this.state);
+    this.setState({
+      storedValue: [answer],
+      activeDisplay: []
+    });
   };
 
   // gets obj from fetchId, updates activeDisplay(str)
@@ -188,7 +215,6 @@ class App extends Component {
     if (activeDisplay[0] === 0 && activeDisplay.length === 1) {
       this.setState({ activeDisplay: [e] });
     } else this.setState({ activeDisplay: udpatedDisplay });
-    console.log(this.state);
   };
 
   //clear last input
@@ -221,7 +247,6 @@ class App extends Component {
   //https://stackoverflow.com/questions/38558200/react-setstate-not-updating-immediately
   resetCalc = () => {
     this.setState(this.getInitialState(this.state));
-    console.log(this.state);
   };
 
   render() {
