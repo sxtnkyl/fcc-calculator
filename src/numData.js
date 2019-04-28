@@ -16,8 +16,8 @@ const numData = [
   { id: "/", keycode: [111], value: "operand" },
   { id: "±", keycode: [220], value: "plusminus" },
   { id: "=", keycode: [13], value: "equal" },
-  { id: "undo last", keycode: [16], value: "rightshift" },
-  { id: "clear last", keycode: [8], value: "backspace" },
+  { id: "undo last entry", keycode: [16], value: "rightshift" },
+  { id: "clear last input", keycode: [8], value: "backspace" },
   { id: "clear", keycode: [46], value: "delete" }
 ];
 

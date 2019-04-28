@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Buttons from "./buttons";
+import Guide from "./guide";
 
 class App extends Component {
   constructor(props) {
@@ -260,6 +261,7 @@ class App extends Component {
         <div className="col-sm-6" id="inputkeys">
           <Buttons numData={this.props.numData} onClick={this.handleClick} />
         </div>
+        <Guide />
       </div>
     );
   }
