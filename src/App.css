@@ -1,17 +1,60 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+
 body {
-  background: blue;
+  background: black;
   display: flex;
   justify-content: center;
+  font-family: "Montserrat";
+  color: teal;
 }
 
 .container {
   width: 50vw;
 }
 
-#displayscreen {
-  background: green;
+h1 {
+  font-size: 3em;
+  text-align: center;
 }
 
-#inputkeys {
-  background: red;
+.displayscreen {
+  border: 3px solid teal;
+  padding: 20px;
+  overflow: hidden;
+}
+
+#labeltext {
+  color: white;
+}
+
+#displaytext {
+  font-size: 1.5em;
+  float: right;
+}
+
+#errormsg {
+  color: red;
+}
+.buttongroup {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.individualbutton {
+  font-family: "Montserrat";
+  background: teal;
+  margin: 10px;
+  padding: 10px;
+  font-weight: 800;
+}
+
+.guide {
+  border: 5px solid black;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
 }

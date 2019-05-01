@@ -253,14 +253,19 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <div className="col-sm-6" id="displayscreen">
-          <p>{this.state.storedValue}</p>
-          {this.state.activeDisplay}
-          {this.state.error}
+        <h1>React Calculator</h1>
+        <div className="displayscreen">
+          <p>
+            <span id="labeltext">Stored Calculation: </span>
+            <span id="displaytext">{this.state.storedValue}</span>
+          </p>
+          <p>
+            <span id="labeltext">Current Entry: </span>
+            <span id="displaytext">{this.state.activeDisplay}</span>
+          </p>
+          <span id="errormsg">{this.state.error}</span>
         </div>
-        <div className="col-sm-6" id="inputkeys">
-          <Buttons numData={this.props.numData} onClick={this.handleClick} />
-        </div>
+        <Buttons numData={this.props.numData} onClick={this.handleClick} />
         <Guide />
       </div>
     );

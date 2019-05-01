@@ -14,7 +14,7 @@ class Buttons extends Component {
       );
     });
 
-    return <div>{buttons}</div>;
+    return <div className="buttongroup">{buttons}</div>;
   }
 }
 
